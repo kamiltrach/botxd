@@ -1,0 +1,378 @@
+{
+  "nodes": [
+    {
+      "type": "command",
+      "name": "help",
+      "guid": "7942fe4c-dffa-4146-8cab-d254b3d80d5d",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": []
+        }
+      ],
+      "inputs": [],
+      "x": 148,
+      "y": 188
+    },
+    {
+      "type": "command",
+      "name": "info",
+      "guid": "2224944a-561a-4fa1-824b-2f31ea37c836",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": []
+        }
+      ],
+      "inputs": [],
+      "x": 8,
+      "y": 313
+    },
+    {
+      "type": "response",
+      "name": "help menu",
+      "guid": "37eda463-a170-44f9-af54-61378ffc9294",
+      "reactionFields": [],
+      "embedfields": [
+        {
+          "name": "!help",
+          "value": "Shows this menu",
+          "inline": "true"
+        },
+        {
+          "name": "!info",
+          "value": "Shows some info",
+          "inline": "true"
+        }
+      ],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "7942fe4c-dffa-4146-8cab-d254b3d80d5d"
+        }
+      ],
+      "x": 343,
+      "y": 166,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "1FFF57",
+        "Help Menu",
+        "",
+        "Bot Name Here",
+        "",
+        "",
+        "This is the embed description, replace this with some info about your bot!",
+        "",
+        "",
+        "",
+        "false",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "show info",
+      "guid": "5053a44d-4a5e-460a-974d-da0cc07aac7c",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "2224944a-561a-4fa1-824b-2f31ea37c836"
+        }
+      ],
+      "x": 360,
+      "y": 324,
+      "rtype": "Message",
+      "rsubtype": "Send Message",
+      "formdata": [
+        "${dbsVars.DefaultChannel.id}",
+        "Command Author: ${dbsVars.CommandAuthor.displayName}\nTagged author: <@${dbsVars.CommandAuthor.id}>\nYou can insert more values by clicking the \"Insert Variable\" button next to this field!",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelName",
+        "messageText",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": []
+    },
+    {
+      "type": "command",
+      "name": "ticket",
+      "guid": "ec338835-c0ae-4da5-9775-d93766e617f1",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "a8de17fb-af6c-41d1-9d57-15221bb83abe"
+          ]
+        }
+      ],
+      "inputs": [],
+      "x": 46,
+      "y": 499
+    },
+    {
+      "type": "response",
+      "name": "utwórz kanał",
+      "guid": "a8de17fb-af6c-41d1-9d57-15221bb83abe",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "ticket_kanal",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "8d5f0427-d0e3-430a-be62-d919dfa9f5dc"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "ec338835-c0ae-4da5-9775-d93766e617f1"
+        }
+      ],
+      "x": 289,
+      "y": 505,
+      "rtype": "Channel Action",
+      "rsubtype": "Create Channel",
+      "formdata": [
+        "ticket-${dbsVars.CommandAuthor.displayName}",
+        "957893005539418132",
+        "otwarcie ticket",
+        "Text",
+        "ticket_kanal",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "chancategory",
+        "reason",
+        "channeltype",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "dodaj uprawnienia",
+      "guid": "8d5f0427-d0e3-430a-be62-d919dfa9f5dc",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "f586234f-5d1d-4366-bc20-e4e33b8ca8e6"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "a8de17fb-af6c-41d1-9d57-15221bb83abe"
+        }
+      ],
+      "x": 472,
+      "y": 498,
+      "rtype": "Channel Action",
+      "rsubtype": "Update Channel Permissions",
+      "formdata": [
+        "${tempVars.ticket_kanal.id}",
+        "${dbsVars.CommandAuthor.id}",
+        [
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES"
+        ],
+        "Allow"
+      ],
+      "formnames": [
+        "channelName",
+        "permid",
+        "permissions",
+        "allow"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "ticket msg",
+      "guid": "f586234f-5d1d-4366-bc20-e4e33b8ca8e6",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "ricket_msg",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "d4c2efa3-8b23-40be-9571-94572f7d5fcb"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "8d5f0427-d0e3-430a-be62-d919dfa9f5dc"
+        }
+      ],
+      "x": 658,
+      "y": 538,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.ticket_kanal.id}",
+        "2EE6FF",
+        "Ticket",
+        "",
+        "",
+        "",
+        "",
+        "Witaj ${dbsVars.CommandAuthor.displayName} Tutaj możesz złożyć skargę, informacje, złożyć propozycje bezpośrednio do administracji.\n\nGdy będziesz już uważał że sprawa którą tutaj napisałeś została rozwiązana to będziesz mógł zamknąć emotką poniżej ticketa",
+        "",
+        "",
+        "",
+        "false",
+        "ricket_msg",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "emocji ticket",
+      "guid": "d4c2efa3-8b23-40be-9571-94572f7d5fcb",
+      "reactionFields": [
+        "❌"
+      ],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "❌",
+          "connections": [
+            "7440eb03-e3e3-4f48-9c5c-758e6bdd5cec"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "f586234f-5d1d-4366-bc20-e4e33b8ca8e6"
+        }
+      ],
+      "x": 880,
+      "y": 508,
+      "rtype": "Reaction",
+      "rsubtype": "Add Reaction Listener",
+      "formdata": [
+        "${tempVars.ricket_msg.id}",
+        "0",
+        "da",
+        "da",
+        "BOOL_TRUE@@"
+      ],
+      "formnames": [
+        "message",
+        "duration",
+        "reactionemoji",
+        "reactionuser",
+        "react"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "zamykanie ticket",
+      "guid": "7440eb03-e3e3-4f48-9c5c-758e6bdd5cec",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "d4c2efa3-8b23-40be-9571-94572f7d5fcb"
+        }
+      ],
+      "x": 1079,
+      "y": 492,
+      "rtype": "Channel Action",
+      "rsubtype": "Delete Channel",
+      "formdata": [
+        "${tempVars.ticket_kanal.id}",
+        "zamknięcie ticket"
+      ],
+      "formnames": [
+        "channelname",
+        "reason"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    }
+  ]
+}

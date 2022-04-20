@@ -1,0 +1,85 @@
+{
+  "command": [
+    {
+      "name": "help",
+      "actions": []
+    },
+    {
+      "name": "info",
+      "actions": []
+    },
+    {
+      "name": "ticket",
+      "actions": [
+        {
+          "name": "utwórz kanał",
+          "category": "Channel Action",
+          "type": "Create Channel",
+          "messageActionRows": [],
+          "channelname": "ticket-${dbsVars.CommandAuthor.displayName}",
+          "chancategory": "957893005539418132",
+          "reason": "otwarcie ticket",
+          "channeltype": "Text",
+          "savetovariable": "ticket_kanal",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "dodaj uprawnienia",
+          "category": "Channel Action",
+          "type": "Update Channel Permissions",
+          "messageActionRows": [],
+          "channelname": "${tempVars.ticket_kanal.id}",
+          "permid": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "VIEW_CHANNEL",
+            "SEND_MESSAGES"
+          ],
+          "allow": "Allow"
+        },
+        {
+          "name": "ticket msg",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${tempVars.ticket_kanal.id}",
+          "color": "2EE6FF",
+          "title": "Ticket",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Witaj ${dbsVars.CommandAuthor.displayName} Tutaj możesz złożyć skargę, informacje, złożyć propozycje bezpośrednio do administracji.\n\nGdy będziesz już uważał że sprawa którą tutaj napisałeś została rozwiązana to będziesz mógł zamknąć emotką poniżej ticketa",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "false",
+          "savetovariable": "ricket_msg",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "emocji ticket",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "❌": [
+              {
+                "name": "zamykanie ticket",
+                "category": "Channel Action",
+                "type": "Delete Channel",
+                "messageActionRows": [],
+                "channelname": "${tempVars.ticket_kanal.id}",
+                "reason": "zamknięcie ticket"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.ricket_msg.id}",
+          "duration": "0",
+          "reactionemoji": "da",
+          "reactionuser": "da",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    }
+  ]
+}
